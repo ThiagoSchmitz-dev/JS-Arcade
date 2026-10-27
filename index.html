@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="JS Arcade: quatro sessões curtas de JavaScript e um dashboard de desempenho." />
+    <title>JS Arcade — Organize o foco e acelere o jogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav shell" aria-label="Navegação principal">
+        <a class="brand" href="#home" aria-label="JS Arcade, ir para a página inicial"><img class="brand-logo" src="assets/icons/JS%20ARCADE%20LOGO.jpg" alt="" /><span>JS Arcade</span></a>
+        <div class="nav-links" aria-label="Seções">
+          <a class="nav-link is-active" href="#home">Home</a>
+          <a class="nav-link" href="#jogos">Jogos</a>
+          <a class="nav-link" href="#dashboard">Dashboard</a>
+          <a class="nav-link" href="#sobre">Sobre</a>
+        </div>
+        <a class="button button-light nav-cta" href="#jogos">Entrar</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero section shell" aria-labelledby="home-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Várias sessões <span aria-hidden="true">·</span> Um só arcade</p>
+          <h1 id="home-title">Seu arcade de <span>JavaScript</span>.</h1>
+          <p class="lead">Sessões curtas, progresso real e um dashboard final que mostra o seu desempenho em cada jogo.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#jogos">Entrar no arcade <span aria-hidden="true">→</span></a>
+            <a class="button button-outline" href="#jogos">Ver as sessões</a>
+          </div>
+          <dl class="stats-strip">
+            <div><dt>4</dt><dd>Sessões</dd></div>
+            <div><dt>100%</dt><dd>JavaScript puro</dd></div>
+            <div><dt>1</dt><dd>Dashboard final</dd></div>
+          </dl>
+        </div>
+        <aside class="journey-panel" aria-label="Progresso da jornada">
+          <div class="panel-heading"><p>PROGRESSO DA JORNADA</p><span id="home-progress-label">0 de 4</span></div>
+          <div id="home-progress" class="progress-list"></div>
+          <a class="text-link" href="#dashboard">Ver desempenho <span aria-hidden="true">→</span></a>
+        </aside>
+      </section>
+
+      <section id="jogos" class="section shell games-section" aria-labelledby="games-title">
+        <div class="section-heading"><p class="section-kicker">SESSÕES</p><h2 id="games-title">Quatro sessões, um só projeto.</h2><p>Clique em um card e o arcade rola direto para a sessão, sem sair da página. Cada sessão alimenta o dashboard final.</p></div>
+        <div class="game-cards">
+          <a class="game-card" href="#pomodoro"><span class="session-number">SESSÃO 01</span><span class="game-icon" aria-hidden="true">◌</span><h3>Pomodoro</h3><p>Foco gamificado: rodadas de 20s clicando nos alvos e 10s de pausa.</p><span class="card-tag">FOCO E CONSTÂNCIA</span></a>
+          <a class="game-card" href="#kanban"><span class="session-number">SESSÃO 02</span><span class="game-icon" aria-hidden="true">⌘</span><h3>Kanban</h3><p>Arraste as tecnologias para as colunas Front-end e Back-end.</p><span class="card-tag">ORGANIZAÇÃO</span></a>
+          <a class="game-card" href="#memoria"><span class="session-number">SESSÃO 03</span><span class="game-icon" aria-hidden="true">◫</span><h3>JS Memória</h3><p>Repita a ordem correta dos cards de TI. A sequência cresce a cada rodada.</p><span class="card-tag">MEMÓRIA CURTA</span></a>
+          <a class="game-card" href="#reacao"><span class="session-number">SESSÃO 04</span><span class="game-icon" aria-hidden="true">✦</span><h3>Reação</h3><p>O alvo só sai no clique. O que pontua é o seu tempo de resposta.</p><span class="card-tag">TEMPO DE RESPOSTA</span></a>
+        </div>
+        <p class="section-bridge">Agora que o conceito está claro, escolha sua primeira sessão.</p>
+
+        <section id="pomodoro" class="play-session" aria-labelledby="pomodoro-title">
+          <div class="session-intro"><p class="session-number">SESSÃO 01</p><h2 id="pomodoro-title">Pomodoro <span>— foco gamificado</span></h2><p>Mantenha o foco: clique nos alvos em três rounds de 20 segundos, com pausas curtas entre eles.</p></div>
+          <div class="game-panel pomodoro-panel">
+            <div class="game-hud" aria-live="polite"><div><span>FASE</span><strong id="pomodoro-phase">Pronto</strong></div><div><span>TEMPO</span><strong id="pomodoro-time">20s</strong></div><div><span>ROUND</span><strong id="pomodoro-round">0 de 3</strong></div><div><span>ALVOS</span><strong id="pomodoro-targets">0 / 36</strong></div></div>
+            <p id="pomodoro-message" class="game-message">Inicie quando estiver pronto para manter o foco.</p>
+            <div id="pomodoro-board" class="target-board" aria-label="Área de foco. Clique no alvo quando ele aparecer."></div>
+            <div class="game-controls"><button id="pomodoro-start" class="button button-primary" type="button">Começar sessão</button><button id="pomodoro-skip" class="button button-outline" type="button" disabled>Pular pausa</button><button id="pomodoro-stop" class="button button-quiet" type="button" disabled>Encerrar sessão</button><a id="pomodoro-next" class="button button-primary is-hidden" href="#kanban">Prosseguir <span aria-hidden="true">→</span></a></div>
+          </div>
+        </section>
+
+        <section id="kanban" class="play-session" aria-labelledby="kanban-title">
+          <div class="session-intro"><p class="session-number">SESSÃO 02</p><h2 id="kanban-title">Kanban <span>— organização</span></h2><p>Coloque os itens em seus devidos lugares. Você pode arrastar, tocar ou selecionar um item e depois uma coluna.</p></div>
+          <div class="game-panel">
+            <div class="game-hud compact-hud" aria-live="polite"><div><span>CORRETOS</span><strong id="kanban-correct">0 / 6</strong></div><div><span>ERROS</span><strong id="kanban-errors">0</strong></div><div><span>TEMPO</span><strong id="kanban-time">00:00</strong></div></div>
+            <p id="kanban-message" class="game-message">Clique em “Começar classificação” para embaralhar os cards.</p>
+            <div class="kanban-layout"><div id="kanban-source" class="tech-source" aria-label="Tecnologias disponíveis"></div><div id="kanban-front" class="drop-column" data-layer="frontend" tabindex="0" aria-label="Coluna Front-end"><h3>Front-end</h3><p>Interface e experiência</p></div><div id="kanban-back" class="drop-column" data-layer="backend" tabindex="0" aria-label="Coluna Back-end"><h3>Back-end</h3><p>Lógica e serviços</p></div></div>
+            <div class="game-controls"><button id="kanban-start" class="button button-primary" type="button">Começar classificação</button><a id="kanban-next" class="button button-primary is-hidden" href="#memoria">Prosseguir <span aria-hidden="true">→</span></a></div>
+          </div>
+        </section>
+
+        <section id="memoria" class="play-session" aria-labelledby="memoria-title">
+          <div class="session-intro"><p class="session-number">SESSÃO 03</p><h2 id="memoria-title">JS Memória <span>— sequência crescente</span></h2><p>No nível 1, repita a ordem do Frontend. No nível 2, coloque as linguagens de Back-end pela data de criação: C (1972), Python (1991) e Java (1995).</p><p>Ordem de criação da linguagem (ano de lançamento). Em empate, ordem alfabética.</p></div>
+          <div class="game-panel">
+            <div class="game-hud compact-hud" aria-live="polite"><div><span>NÍVEL</span><strong id="memory-level">—</strong></div><div><span>ACERTOS</span><strong id="memory-correct">0</strong></div><div><span>ERROS</span><strong id="memory-errors">0</strong></div></div>
+            <p id="memory-message" class="game-message">Observe a sequência. Depois, repita-a clicando nos cards na mesma ordem.</p>
+            <div id="memory-cards" class="memory-cards" aria-live="polite"></div>
+            <div class="game-controls"><button id="memory-start" class="button button-primary" type="button">Começar sequência</button><button id="memory-next" class="button button-primary is-hidden" type="button">Prosseguir <span aria-hidden="true">→</span></button></div>
+          </div>
+        </section>
+
+        <section id="reacao" class="play-session" aria-labelledby="reaction-title">
+          <div class="session-intro"><p class="session-number">SESSÃO 04</p><h2 id="reaction-title">Reação <span>— tempo de resposta</span></h2><p>Clique no alvo assim que ele aparecer. O que vale aqui é o seu tempo.</p></div>
+          <div class="game-panel">
+            <div class="game-hud compact-hud" aria-live="polite"><div><span>ALVO</span><strong id="reaction-count">0 de 10</strong></div><div><span>ÚLTIMO</span><strong id="reaction-last">—</strong></div><div><span>MELHOR</span><strong id="reaction-best">—</strong></div><div><span>MÉDIA</span><strong id="reaction-average">—</strong></div></div>
+            <p id="reaction-message" class="game-message">O alvo espera o seu clique. Clique fora dele não gera punição.</p>
+            <div id="reaction-board" class="reaction-board" aria-label="Área de reação"></div>
+            <div class="game-controls"><button id="reaction-start" class="button button-primary" type="button">Iniciar rodada</button><a id="reaction-next" class="button button-primary is-hidden" href="#dashboard">Ver dashboard <span aria-hidden="true">→</span></a></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="dashboard" class="section shell dashboard-section" aria-labelledby="dashboard-title">
+        <div class="section-heading"><p class="section-kicker">DASHBOARD</p><h2 id="dashboard-title">O fechamento da jornada.</h2><p>A nota final é a média simples das porcentagens das sessões concluídas.</p></div>
+        <div class="dashboard-grid"><article class="score-panel"><p id="dashboard-status" class="score-status">JOGUE PARA LIBERAR</p><strong id="dashboard-score">—</strong><span id="dashboard-unit">%</span><p id="dashboard-message">Jogue uma sessão para liberar o seu desempenho.</p></article><div id="dashboard-progress" class="dashboard-progress" aria-live="polite"></div></div>
+        <div id="dashboard-kpis" class="kpis"></div>
+        <button id="restart-journey" class="button button-quiet restart-journey" type="button">Reiniciar jornada</button>
+      </section>
+
+      <section id="sobre" class="section shell about-section" aria-labelledby="about-title">
+        <div class="section-heading"><p class="section-kicker">SOBRE O PROJETO</p><h2 id="about-title">Não escolhi um jogo. Fiz todos.</h2></div>
+        <p class="about-lead">O JS Arcade nasceu de uma recusa: em vez de escolher um único joguinho para praticar, reuni todas as experiências em um só projeto. Quatro sessões diferentes, um dashboard que fecha a jornada e JavaScript conduzindo toda a lógica.</p>
+        <ol class="pillars"><li><span>01</span>Foco total em JavaScript: estado, timers, eventos e pontuação.</li><li><span>02</span>HTML e CSS em nível alto — estrutura limpa e visual cuidado.</li><li><span>03</span>Página única com navegação por seções fixa no topo.</li><li><span>04</span>Sem back-end: tudo roda no navegador, com progresso local.</li></ol>
+        <img class="about-logo" src="assets/icons/JS%20ARCADE%20LOGO.jpg" alt="Logo oficial da JS Arcade" />
+      </section>
+    </main>
+    <footer class="footer"><div class="shell">JS Arcade <span aria-hidden="true">·</span> Organize o foco e acelere o jogo</div></footer>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

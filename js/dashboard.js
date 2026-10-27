@@ -1,0 +1,16 @@
+import { CHAVE, obterNomes, resumo } from './state.js';
+
+const destinos = { pomodoro: '#pomodoro', kanban: '#kanban', memoria: '#memoria', reacao: '#reacao' };
+const formatar = valor => new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 }).format(valor);
+function mensagem(nota) { if (nota === 100) return 'Perfeito. Você foi imbatível.'; if (nota >= 90) return 'Espetacular, você foi acima da média.'; if (nota >= 70) return 'Parabéns, você foi excelente.'; if (nota >= 50) return 'Você foi bem, mas ainda dá para evoluir.'; return 'Seu desempenho ainda pode melhorar.'; }
+export function atualizarDashboard() {
+  const { sessoes, concluidas, nota } = resumo(); const nomes = obterNomes();
+  const score = document.querySelector('#dashboard-score'); const status = document.querySelector('#dashboard-status'); const unit = document.querySelector('#dashboard-unit'); const texto = document.querySelector('#dashboard-message');
+  if (nota == null) { score.textContent = '—'; unit.textContent = ''; status.textContent = 'JOGUE PARA LIBERAR'; texto.textContent = 'Jogue uma sessão para liberar o seu desempenho.'; } else { score.textContent = formatar(nota); unit.textContent = '%'; status.textContent = concluidas.length === 4 ? 'NOTA FINAL' : `PARCIAL — ${concluidas.length} DE 4 SESSÕES`; texto.textContent = mensagem(nota); }
+  const linhas = Object.keys(nomes).map(nome => { const sessao = sessoes[nome]; const valor = sessao?.percentual ?? 0; return `<a class="dashboard-row${sessao ? '' : ' is-pending'}" href="${destinos[nome]}"><span>${nomes[nome]}</span><div class="progress-track"><i style="width:${valor}%"></i></div><b>${sessao ? `${formatar(valor)}%` : 'Não jogada'}</b></a>`; }).join('');
+  document.querySelector('#dashboard-progress').innerHTML = linhas;
+  const acertos = Object.values(sessoes).reduce((total, s) => total + (s.alvos ?? s.corretos ?? s.acertos ?? s.totalCliques ?? 0), 0); const erros = Object.values(sessoes).reduce((total, s) => total + (s.erros ?? 0), 0); const melhorReacao = sessoes.reacao?.melhorMs; const melhorSessao = concluidas.length ? Object.entries(sessoes).sort((a, b) => b[1].percentual - a[1].percentual)[0][0] : null;
+  document.querySelector('#dashboard-kpis').innerHTML = `<article><span>ACERTOS TOTAIS</span><strong>${acertos}</strong></article><article><span>ERROS TOTAIS</span><strong>${erros}</strong></article><article><span>MELHOR TEMPO</span><strong>${melhorReacao ? `${Math.round(melhorReacao)}ms` : '—'}</strong></article><article><span>MELHOR SESSÃO</span><strong>${melhorSessao ? nomes[melhorSessao] : '—'}</strong></article>`;
+  const homeList = document.querySelector('#home-progress'); homeList.innerHTML = Object.keys(nomes).map(nome => { const valor = sessoes[nome]?.percentual ?? 0; return `<div class="home-progress-row"><span>${nomes[nome]}</span><div class="progress-track"><i style="width:${valor}%"></i></div><b>${sessoes[nome] ? `${formatar(valor)}%` : '—'}</b></div>`; }).join(''); document.querySelector('#home-progress-label').textContent = `${concluidas.length} de 4`;
+}
+export function iniciarReinicioJornada() { document.querySelector('#restart-journey').addEventListener('click', () => { if (confirm('Reiniciar toda a jornada? O progresso será apagado.')) { localStorage.removeItem(CHAVE); location.reload(); } }); }
