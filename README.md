@@ -2,7 +2,7 @@
 
 A gamified single-page app in vanilla JavaScript: four short sessions (Pomodoro, Kanban, JS Memória and Reação) that each produce a percentage, plus a dashboard that turns them into a final score.
 
-**Live demo:** https://SEU-USUARIO.github.io/NOME-DO-REPO/
+Play JS Arcade: https://thiagoschmitz-dev.github.io/JS-Arcade/
 
 ## Features
 
